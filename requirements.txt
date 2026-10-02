@@ -1,0 +1,11 @@
+pandas
+sqlalchemy
+psycopg2-binary
+dbt-core
+dbt-postgres
+catboost
+scikit-learn
+joblib
+kmodes
+streamlit
+plotly

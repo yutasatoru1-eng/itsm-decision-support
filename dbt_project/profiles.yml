@@ -1,0 +1,20 @@
+itsm_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_PORT', '5433') | as_number }}"
+      user: "{{ env_var('DBT_USER', 'postgres') }}"
+      pass: "{{ env_var('DBT_PASSWORD', 'itsm_pwd') }}"
+      dbname: "{{ env_var('DBT_DBNAME', 'itsm_db') }}"
+      schema: public
+      threads: 4
+
+# Notes :
+# - port 5432 est la valeur qu'on a fixee pour toi a cause du conflit de port.
+#   Si tu as garde 5432, change la valeur par defaut ci-dessus ou definis la
+#   variable d'environnement DBT_PORT avant de lancer dbt.
+# - "schema: public" est le schema par defaut de dbt, mais grace au macro
+#   generate_schema_name.sql (voir macros/), nos modeles iront bien dans
+#   "silver" et "gold" et pas dans "public".

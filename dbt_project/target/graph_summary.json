@@ -1,0 +1,1 @@
+{"_invocation_id": "4615b39b-ee2e-4f4f-a88d-4da2040c5df9", "linked": {"0": {"name": "source.itsm_dbt.bronze.itsm_tickets_raw", "type": "source", "succ": [2]}, "1": {"name": "model.itsm_dbt.gold_itsm_tickets", "type": "model"}, "2": {"name": "model.itsm_dbt.silver_itsm_tickets", "type": "model", "succ": [1]}}}

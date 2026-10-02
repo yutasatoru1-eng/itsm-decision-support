@@ -1,0 +1,29 @@
+name: 'itsm_dbt'
+version: '1.0.0'
+config-version: 2
+
+# Ce fichier est la "carte d'identite" du projet dbt.
+# Il dit a dbt : comment s'appelle le projet, ou trouver les modeles SQL,
+# et dans quel schema PostgreSQL les ranger une fois construits.
+
+profile: 'itsm_dbt'
+
+model-paths: ["models"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  itsm_dbt:
+    # Tous les modeles du dossier models/silver/ seront crees
+    # dans le schema PostgreSQL "silver"
+    silver:
+      +materialized: table
+      +schema: silver
+    # Tous les modeles du dossier models/gold/ seront crees
+    # dans le schema PostgreSQL "gold"
+    gold:
+      +materialized: table
+      +schema: gold

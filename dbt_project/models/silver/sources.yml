@@ -1,0 +1,11 @@
+version: 2
+
+# Ce fichier dit a dbt ou se trouve la donnee source (couche Bronze),
+# creee par le script Python d'ingestion (Etape 1).
+
+sources:
+  - name: bronze
+    schema: bronze
+    tables:
+      - name: itsm_tickets_raw
+        description: "Donnees brutes des tickets IT, chargees telles quelles depuis le CSV original."

@@ -1,0 +1,2 @@
+Place ton fichier ITSM_Dataset.csv ici, renomme en ITSM_Dataset_raw.csv
+(ou modifie le chemin RAW_CSV_PATH dans scripts/load_csv_to_bronze.py)

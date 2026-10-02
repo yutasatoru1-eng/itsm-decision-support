@@ -1,0 +1,46 @@
+version: "3.9"
+
+# Ce fichier permet de lancer une base PostgreSQL en local, en une seule commande,
+# sans avoir a installer PostgreSQL manuellement sur ta machine.
+#
+# Utilisation :
+#   1. Installer Docker Desktop (https://www.docker.com/products/docker-desktop/)
+#   2. Dans ce dossier, lancer :  docker compose up -d
+#   3. La base sera accessible sur localhost:5432
+#   4. Pour l'arreter :  docker compose down
+#   5. Pour tout supprimer (y compris les donnees) :  docker compose down -v
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: itsm_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: itsm_pwd
+      POSTGRES_DB: itsm_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - itsm_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Interface web optionnelle pour explorer la base sans taper de SQL en ligne de commande
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: itsm_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  itsm_pgdata:
